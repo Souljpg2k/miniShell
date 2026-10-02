@@ -5,4 +5,5 @@ ShellRoot {
     Clock {}
     Media {}
     System {}
+    User {}
 }

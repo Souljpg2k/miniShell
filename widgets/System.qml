@@ -8,7 +8,6 @@ import QtQuick.Layouts
 
 PanelWindow {
     id: root
-
     anchors {
         top: true
         right: true
