@@ -24,14 +24,14 @@ PanelWindow {
     property MprisPlayer picked: null
     readonly property var players: Mpris.players.values
     readonly property MprisPlayer player: {
-        const list = players;
+        const list = players
         if (picked !== null) {
             for (let i = 0; i < list.length; i++) {
                 if (list[i] === picked)
-                    return picked;
+                    return picked
             }
         }
-        return list[0] ?? null;
+        return list[0] ?? null
     }
     readonly property bool isPlaying: player?.isPlaying ?? false
 
@@ -43,12 +43,12 @@ PanelWindow {
 
             Component.onCompleted: {
                 if (modelData.isPlaying)
-                    root.picked = modelData;
+                    root.picked = modelData
             }
 
             function onIsPlayingChanged() {
                 if (modelData.isPlaying)
-                    root.picked = modelData;
+                    root.picked = modelData
             }
         }
     }
@@ -138,29 +138,30 @@ PanelWindow {
                     anchors.fill: parent
                     onWheel: wheel => {
                         if (wheel.angleDelta.y > 0)
-                            Quickshell.execDetached(["wpctl", "set-volume", "-l", "1", "@DEFAULT_AUDIO_SINK@", "5%+"]);
+                            Quickshell.execDetached(["wpctl", "set-volume", "-l", "1", "@DEFAULT_AUDIO_SINK@", "5%+"])
                         else
-                            Quickshell.execDetached(["wpctl", "set-volume", "@DEFAULT_AUDIO_SINK@", "5%-"]);
+                            Quickshell.execDetached(["wpctl", "set-volume", "@DEFAULT_AUDIO_SINK@", "5%-"])
                     }
                 }
             }
 
             ColumnLayout {
-                Layout.fillWidth: true
-                Layout.fillHeight: true
                 Layout.rightMargin: 12
                 Layout.topMargin: 8
-                Layout.bottomMargin: 12
+                Layout.bottomMargin: 8
+                spacing: -3
 
                 StyledText {
                     Layout.fillWidth: true
                     text: root.player?.trackArtist || "Unknown Artist"
+                    font.pixelSize: 13
                     elide: Text.ElideRight
                 }
 
                 StyledText {
                     Layout.fillWidth: true
                     text: root.player?.trackTitle || "Unknown Title"
+                    font.pixelSize: 12
                     font.bold: true
                     elide: Text.ElideRight
                 }
