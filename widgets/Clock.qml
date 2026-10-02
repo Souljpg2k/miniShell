@@ -26,16 +26,25 @@ PanelWindow {
         anchors.fill: parent
 
         MaterialShape {
+            id: s
             anchors.centerIn: parent
             implicitSize: root.clockSize
             shape: MaterialShape.Cookie4Sided
             color: Colors.bg
+
+            property bool spinning: true
 
             RotationAnimator on rotation {
                 from: 0
                 to: 360
                 duration: 12000
                 loops: Animation.Infinite
+                paused: !s.spinning
+            }
+
+            MouseArea {
+                anchors.fill: parent
+                onClicked: s.spinning = !s.spinning
             }
         }
 
