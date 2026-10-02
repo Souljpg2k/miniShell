@@ -53,6 +53,18 @@ PanelWindow {
         }
     }
 
+    function formatTime(sec) {
+        const s = Math.floor(sec)
+        return Math.floor(s / 60) + ":" + (s % 60 < 10 ? "0" : "") + s % 60
+    }
+
+    Timer {
+        running: root.isPlaying
+        interval: 1000
+        repeat: true
+        onTriggered: root.player?.positionChanged()
+    }
+
     Rectangle {
         anchors.fill: parent
         color: Colors.bg
@@ -89,15 +101,7 @@ PanelWindow {
                     animationDuration: 650
 
                     property int shapeIndex: 0
-                    property var shapes: [
-                        MaterialShape.SoftBurst,
-                        MaterialShape.Cookie9Sided,
-                        MaterialShape.Pentagon,
-                        MaterialShape.Pill,
-                        MaterialShape.Sunny,
-                        MaterialShape.Cookie4Sided,
-                        MaterialShape.Oval,
-                    ]
+                    property var shapes: [MaterialShape.SoftBurst, MaterialShape.Cookie9Sided, MaterialShape.Pentagon, MaterialShape.Pill, MaterialShape.Sunny, MaterialShape.Cookie4Sided, MaterialShape.Oval,]
 
                     Timer {
                         interval: 650
@@ -164,6 +168,17 @@ PanelWindow {
                     font.pixelSize: 12
                     font.bold: true
                     elide: Text.ElideRight
+                }
+
+                StyledText {
+                    visible: root.player?.positionSupported ?? false
+                    text: root.formatTime(root.player?.position ?? 0) + (root.player?.lengthSupported ? " / " + root.formatTime(root.player.length) : "")
+                    font.pixelSize: 11
+                    font.features: ({
+                            "tnum": 1
+                        })
+                    opacity: 0.7
+                    topPadding: 4
                 }
 
                 Item {
