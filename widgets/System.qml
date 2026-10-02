@@ -2,6 +2,7 @@ import qs.components
 import M3Shapes
 import Quickshell
 import Quickshell.Io
+import Quickshell.Wayland
 import QtQuick
 import QtQuick.Layouts
 
@@ -19,6 +20,8 @@ PanelWindow {
     color: "transparent"
     implicitWidth: layout.implicitWidth
     implicitHeight: layout.implicitHeight
+    WlrLayershell.layer: WlrLayer.Bottom
+    exclusiveZone: 0
 
     property int cpuUsage: 0
     property int memUsage: 0
